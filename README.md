@@ -1,7 +1,7 @@
 # Memoraudio: changing the way you play games
 
 <p align="center">
-<img src="https://joonsauce.me/memoraudio/media/eavesdropping" alt="memoraudio logo" height=300>
+<img src="https://joonsauce.me/memoraudio/media/eavesdropping.png" alt="memoraudio logo" height=300>
 </p>
 
 # Table of Contents
