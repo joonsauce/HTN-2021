@@ -23,4 +23,4 @@ api.add_resource(nums, '/nums')
 api.add_resource(names, '/names')
 
 if __name__ == '__main__':
-    app.run(host="192.168.0.192")
+    app.run(host="<your-ip-here>")
