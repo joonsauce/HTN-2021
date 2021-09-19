@@ -39,20 +39,21 @@ class PingView(View):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class CustomersView(View):
+class UsersView(View):
     def get(self, request, id=None, *args, **kwargs):
         if id is None:
-            customers = list(Customers.objects.values())
+            users = list(Users.objects.values())
         else:
-            customers = list(Customers.objects.filter(id=id).values())
-        return JsonResponse(customers, safe=False)
+            users = list(Users.objects.filter(id=id).values())
+        return JsonResponse(users, safe=False)
 
     @retry_on_exception(3)
     @atomic
     def post(self, request, *args, **kwargs):
         form_data = json.loads(request.body.decode())
         name = form_data['name']
-        c = Customers(name=name)
+        num = form_data['num']
+        c = Users(name=name, num=num)
         c.save()
         return HttpResponse(status=200)
 
@@ -61,53 +62,5 @@ class CustomersView(View):
     def delete(self, request, id=None, *args, **kwargs):
         if id is None:
             return HttpResponse(status=404)
-        Customers.objects.filter(id=id).delete()
-        return HttpResponse(status=200)
-
-    # The PUT method is shadowed by the POST method, so there doesn't seem
-    # to be a reason to include it.
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class ProductView(View):
-    def get(self, request, id=None, *args, **kwargs):
-        if id is None:
-            products = list(Products.objects.values())
-        else:
-            products = list(Products.objects.filter(id=id).values())
-        return JsonResponse(products, safe=False)
-
-    @retry_on_exception(3)
-    @atomic
-    def post(self, request, *args, **kwargs):
-        form_data = json.loads(request.body.decode())
-        name, price = form_data['name'], form_data['price']
-        p = Products(name=name, price=price)
-        p.save()
-        return HttpResponse(status=200)
-
-    # The REST API outlined in the github does not say that /product/ needs
-    # a PUT and DELETE method
-
-
-@method_decorator(csrf_exempt, name='dispatch')
-class OrdersView(View):
-    def get(self, request, id=None, *args, **kwargs):
-        if id is None:
-            orders = list(Orders.objects.values())
-        else:
-            orders = list(Orders.objects.filter(id=id).values())
-        return JsonResponse(orders, safe=False)
-
-    @retry_on_exception(3)
-    @atomic
-    def post(self, request, *args, **kwargs):
-        form_data = json.loads(request.body.decode())
-        c = Customers.objects.get(id=form_data['customer']['id'])
-        o = Orders(subtotal=form_data['subtotal'], customer=c)
-        o.save()
-        for p in form_data['products']:
-            p = Products.objects.get(id=p['id'])
-            o.product.add(p)
-        o.save()
+        Users.objects.filter(id=id).delete()
         return HttpResponse(status=200)
