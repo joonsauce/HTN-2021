@@ -20,5 +20,5 @@
 # License
 This project is released under the MIT license, see `LICENSE` for more info.
 # The Team
-Farzad Rahman - [LinkedIn](https://www.linkedin.com/farzadrahman), [Website](https://farzadr.me)
+Farzad Rahman - [LinkedIn](https://www.linkedin.com/farzadrahman), [Website](https://farzadr.me) <br>
 Joonseo Lee - [LinkedIn](https://www.linkedin.com/joonsauce), [Website](https://joonsauce.me)
